@@ -1,6 +1,6 @@
 /**
  * Main class of the application
- * @Koufos user
+ * @Thanasis user
  *
  *
  */
@@ -90,7 +90,7 @@ public class CarOps {
 /**
 * Class representing a specific type of spare part
 * with a specific name and unit cost.
-* @Koufos user
+* @Thanasis user
 *
 */
 public class PartType {
@@ -140,7 +140,7 @@ public void print() {
 * Class representing use in the context of a repair,
 * a certain quantity of a certain type of spare part.
 * 
-* @Koufos user
+* @Thanasis user
 *
 */
 public class PartUsage {
@@ -176,7 +176,7 @@ public void setPartType(PartType partType) {
 
 /**
  * Calculation of the cost of the type of spare part used
- * @return
+ * @Thanasis
  */
 public double getCost() {
   /**
@@ -199,7 +199,7 @@ public double getCost() {
 * Incorporates lists of parts uses and tasks
 * repair work and repair tasks performed as part of the repair.
 * 
-* @Koufos user
+* @Thanasis user
 *
 */
 public class Repair {
@@ -284,7 +284,7 @@ public void print() {
 /**
 * Class representing a repair job with a specific name
 * and one-off cost of execution.
-* @Koufos user
+* @Thanasis user
 *
 */
 public class Task {
