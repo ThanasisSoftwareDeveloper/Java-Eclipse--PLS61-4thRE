@@ -1,0 +1,331 @@
+/**
+ * Main class of the application
+ * @Koufos user
+ *
+ *
+ */
+//import java.util.ArrayList;(there should be)
+
+public class CarOps {
+	public static void main(String[] args) {
+	List<Task> tasks = new ArrayList<Task>();
+    /**
+     * TODO 1: Fill in the necessary code to create objects 
+     * for the 3 repair tasks listed in the task statement. 
+     * Then add the objects to the tasks list.
+     */
+    
+        tasks.add(new Task("Αλλαγή λαδιών", 20)); //in the cost column: 20€
+        tasks.add(new Task("Αλλαγή φίλτρου καμπίνας", 5));//cost 5€
+        tasks.add(new Task("Συντήρηση φρένων", 30)); //cost 30€
+
+       //ends TODO 1  
+   
+    List<PartType> partTypes = new ArrayList<PartType>();
+    /**
+     * TODO 2: Fill in the necessary code to create objects
+     * for the 6 spare parts mentioned in the pronunciation of the task.
+     * Add the objects to the partTypes list. 
+     */ 
+        partTypes.add(new PartType("Συσκευασία λαδιών 4lt", 30));//cost 30€
+        partTypes.add(new PartType("Φίλτρο λαδιού", 20)); //cost 20€
+        partTypes.add(new PartType("Φίλτρο καμπίνας", 30)); //cost 30€
+        partTypes.add(new PartType("Τακάκι φρένων εμπρός τροχού", 5));//cost 5€
+        partTypes.add(new PartType("Τακάκι φρένων πίσω τροχού", 5));//cost 5€
+        partTypes.add(new PartType("Υγρό φρένων", 10)); //cost 10€
+
+      
+      //ends TODO 2 (6 items and addition requested) 
+    
+    List<Repair> repairList = new ArrayList<Repair>();
+    
+    Repair annualService = new Repair(1);
+    /**
+     * TODO 3: Complete the necessary code so that the object
+     * annualService has an appropriate duration and is associated with the uses            
+     * spare parts and repair tasks listed in the pronunciation.
+     */
+   		annualService.addRepairTask(tasks.get(0));
+        annualService.addRepairTask(tasks.get(1));
+        annualService.addPartUsage(new PartUsage(1, partTypes.get(0)));
+        annualService.addPartUsage(new PartUsage(1, partTypes.get(1)));
+        annualService.addPartUsage(new PartUsage(1, partTypes.get(2)));
+
+      //ends TODO 3  
+
+    Repair brakeService = new Repair(2);
+    /**
+     * TODO 4: Complete the necessary code so that the object
+     * brakeService object has an appropriate duration and is associated with the uses            
+   * spare parts and repair tasks listed in the pronunciation.
+   */ 
+   	 brakeService.addRepairTask(tasks.get(2));
+        brakeService.addPartUsage(new PartUsage(4, partTypes.get(3)));
+        brakeService.addPartUsage(new PartUsage(4, partTypes.get(4)));
+        brakeService.addPartUsage(new PartUsage(1, partTypes.get(5)));
+        
+      //ends TODO 4
+    
+    repairList.add(annualService);
+    repairList.add(brakeService);
+    
+    System.out.println("----- Εργασίες ------");
+    for(Task task: tasks) {
+        task.print();
+    }
+    
+    System.out.println("\n----- Τύποι ανταλλακτικών ------");
+    for(PartType partType: partTypes) {
+        partType.print();
+    }
+    
+    System.out.println("\n----- Επισκευές ------");
+    for(Repair repair: repairList) {
+        repair.print();
+    }
+}
+}
+
+
+/**
+* Class representing a specific type of spare part
+* with a specific name and unit cost.
+* @Koufos user
+*
+*/
+public class PartType {
+private String name;
+private double cost;
+
+public PartType(String name, double cost) {
+    super();
+    /**
+     * TODO 5: Fill in the manufacturer's code like this 
+     * so that it works correctly.
+     */
+     
+     this.name = name;// current object with variable name
+     this.cost = cost;// current object with variable cost
+     
+   //ends TODO 5
+     
+}
+
+public String getName() {
+    return name;
+}
+public void setName(String name) {
+    this.name = name;
+}
+public double getCost() {
+    return cost;
+}
+public void setCost(double cost) {
+    this.cost = cost;
+}
+
+public void print() {
+    /**
+     * TODO 6: Implement the print() function to display the name
+     * and the cost of the part.
+     */ 
+     
+     System.out.print(name + ": " + cost + "€");
+
+     //ends TODO 6
+}
+}
+
+/**
+* Class representing use in the context of a repair,
+* a certain quantity of a certain type of spare part.
+* 
+* @Koufos user
+*
+*/
+public class PartUsage {
+private int quantity;
+private PartType partType;
+
+public PartUsage(int quantity, PartType partType) {
+    
+    /**
+     * TODO 7: Fill in the manufacturer's code like this 
+     * so that it works correctly
+     */ 
+    
+    this.quantity = quantity; // current object with variable quantity
+    this.partType = partType; // current object with variable partType
+
+     //ends TODO 7
+    
+}
+
+public int getQuantity() {
+    return quantity;
+}
+public void setQuantity(int quantity) {
+    this.quantity = quantity;
+}
+public PartType getPartType() {
+    return partType;
+}
+public void setPartType(PartType partType) {
+    this.partType = partType;
+}
+
+/**
+ * Calculation of the cost of the type of spare part used
+ * @return
+ */
+public double getCost() {
+  /**
+     * TODO 8: Complete the implementation of the method so that it calculates and 
+     * return the cost of one use of a spare part.
+     */ 
+    
+    return partType.getCost() * quantity;
+
+     //ends TODO 8
+    return 0;
+}
+}
+
+
+
+
+/**
+* Class representing the repair of a car.
+* Incorporates lists of parts uses and tasks
+* repair work and repair tasks performed as part of the repair.
+* 
+* @Koufos user
+*
+*/
+public class Repair {
+/**
+ * Duration of repair
+ */
+private int duration;
+/**
+ * List of uses of spare parts within the repair
+ */
+private List<PartUsage> partUsages = new ArrayList<PartUsage>();
+/**
+ * List of repair work carried out in the context of
+ * of the repair.
+ */
+private List<Task> repairTasks = new ArrayList<Task>();
+
+public Repair() { 
+    
+}
+
+public void addPartUsage(PartUsage usage) {
+    partUsages.add(usage);
+}
+public void addRepairTask(Task task) {
+    repairTasks.add(task);
+}
+public int getDuration() {
+    return duration;
+}
+public void setDuration(int duration) {
+    this.duration = duration;
+}
+public List<PartUsage> getPartUsages() {
+    return partUsages;
+}
+public void setPartUsages(List<PartUsage> partUsages) {
+    this.partUsages = partUsages;
+}
+
+public double getTotalCost() {
+    /**
+     * TODO 9: Complete the implementation of the method so that it calculates and 
+     * return the total repair cost.
+     * The total cost is calculated as the sum of the cost of the work 
+* repair work plus the cost of the spare parts used.
+*/ 
+ 	
+    double totalCost = 0;
+
+    for (PartUsage partUsage : partUsages) {
+        totalCost += partUsage.getCost();
+    }
+
+    for (Task task : repairTasks) {
+        totalCost += task.getCost();
+    }
+
+    return totalCost;
+
+ 
+//ends TODO 9
+ 
+    return 0;
+}
+
+public void print() {
+    /**
+     * TODO 10: Implement the print() function to display the duration
+     * and the total cost of the repair
+     */ 
+    
+    System.out.print("Duration: " + duration + " day(s), ");
+    System.out.print("Total cost: " + getTotalCost() + "€");
+
+     //ends TODO 10
+      
+}   
+}
+
+
+/**
+* Class representing a repair job with a specific name
+* and one-off cost of execution.
+* @Koufos user
+*
+*/
+public class Task {
+private String name;
+private double cost;
+
+public Task(String name, double cost) {
+    
+    /**
+     * TODO 11: Fill in the manufacturer's code like this 
+     * so that it works correctly.
+     */ 
+    
+     this.name = name; // current object with variable name
+     this.cost = cost;// current object with variable cost
+
+     //ends TODO 11
+    
+}
+public String getName() {
+    return name;
+}
+public void setName(String name) {
+    this.name = name;
+}
+public double getCost() {
+    return cost;
+}
+public void setCost(double cost) {
+    this.cost = cost;
+}
+
+public void print() {
+    /**
+     * TODO 12: Implement the print() function to display the name
+     * and the cost of the repair job.
+     */ 
+    
+    System.out.print(name + ": " + cost + "€");
+
+     //ends TODO 12
+}
+}
+
